@@ -1,0 +1,235 @@
+
+Revisando Git
+
+
+git  init > inicia um repositório
+git status > mostra os arquivos alterados
+git rm > remove um arquivo
+git add <file> > Adiciona os arquivos no git, para monitorar ou salvo no historico no git
+ou
+git add . > adiciona todos os arquivos da pasta
+git rm –cached <file> Remove o arquivo
+Commit é as modificações no git > git commit -m “Criando index.html com lista de cursos”
+Em modificações colocar git add e rodar o git commit informando o que foi atualizado
+
+Consultar Historico no Git
+git log
+git log --oneline > cada commit em cada linha
+git log -p > ve informações mais detalhes
+Consultar o historico de diversas formas atraves dos comandos contidos no site: https://devhints.io/git-log
+git log  --pretty="format:%H"
+
+
+Git Ignore
+criar arquivo git ignore.
+La colocar o nome do arquivo que se quer ignorar ex: ide-config
+para pasta só colocar o nome da pasta ex ide/
+
+nunca comitar codigo que não funciona.
+Comitar a cada alteração significativa
+
+git init --bare > inicia um repositorio remoto puro
+git remote add local C:/Users/ALURA/Documents/git-e-github/servidor 
+git remote > mostra o nome do local remoto.
+git remote -v mostra o nome e o local onde esta o servidor
+git clone c:/caminho do arquivo clona o repositorio.
+git push local master envia os arquivos ao servidor. 
+git remote rename origin local renomeia o nome do servidor.
+git pull local master traz os dados do servidor
+git remote add origin git@github.com:CViniviusSDias/alura-git.git envia
+o repositorio ao git hub.
+
+git branch 
+git branch titulo 
+grit branch
+
+linha de desenvolvimento 
+git checkout titulo
+
+
+atalho para o branch 
+git checkout -b lista
+
+git add . 
+git commit -m "wefertd"
+
+unindo as listas
+gir marge titulo
+
+
+junta todas os comits em um ramo so
+git rebase titulo
+
+git log --graph
+
+git push local master
+
+
+Manipulando as versões
+git config --local  user.name "ana"
+
+git checkout --index.html 
+
+resetar algo que ja foi adicionado 
+git reset HEAD <File>
+resetar algo que ja foi comitado
+git revert "rash do commit "
+
+guardar para depois o código
+git stash
+git stash list
+ trazer a lista e aplicar
+git stash apply 0
+git stash drop 
+ou 
+gir strash pop
+ele puxa as modificações a remove
+git log --oneline
+
+vajar no tempo git
+git checkout "rash"
+
+alterações salvas em um commit especifico criar um branch 
+git checkout -b "novo-branch"
+
+vendo alterações 
+git diff
+git diff <hash>..<hash>
+
+
+tag e releases
+git tag -a v0.1.0 -m "Lançando a primeira versão (BETA) da aplicação de cursos"
+git tag 
+
+cherry-pick traz as alterações commit selecionado ao master
+git cherry-pick 8f7c801
+git cherry-pick (hash do commit)
+bisect encontra o commit especifico que foi localizado o bug no caso  te ter algum
+git bisect start > inicia  e necessario informar o estado do commit
+git bisect bad HEAD > commit atual mostrar o commit que estava bom,
+git bisect good hasdocommit
+git bisect good
+git bisect start
+git bisect reset volta para a master 
+git show hash do cmmit mostra as alteraçãoes que ele fez
+git reevert hash ele reverte o commit 
+git blame mostra o responsavel por modificar o conteudo do codigo com o git blame e o nome do arquivo
+
+branch master e onde tem todo o codigo e onde vai para produção.
+
+branch  master linha principal de desenvolvimento
+nao deve ser feito no master a linha de desenvolvimento nao deve ser feito alterações no master]
+
+git log --graph mostra os commits de uma forma visual.
+
+git branch -d nome do branch  remove o branch.
+
+Caso haja algum conflito, como o branch a ser deletado estar à frente do branch atual, ou seja, se novo-release tivesse alguns commits à frente do master, teríamos que utilizar git branch -D novo-release, com "D" em maiúsculo.
+git branch development
+criar uma feature:
+git checkout -b feature/lista-cursos-cloud
+
+
+nova versao do projeto
+git tag -a v0.2.0 -m "Novas listas de cursos adicionadas"
+adiciona o comentario junto
+
+Git Flow
+Esta forma de organização de branches que facilita a resolução de conflitos,
+ inclusive para que bugs repetidos não aconteçam, é denominada Git flow,
+ bem representada em alguns gráficos, como este
+
+GIT ferramentas
+Git cola
+gitHub desktop 
+GitKraken
+
+Eventos quando uma coisa acontecer execute umma ação
+eventos no git e chamado de git hooks
+
+amos executar cd .git, e o Git bash já nos avisa que estamos dentro do diretório Git. 
+Em seguida, com ls, listaremos as pastas, em que normalmente não mexeremos, porém, 
+entraremos em "hooks" com cd hooks/. Com ls, teremos vários arquivos .sample, ou seja, 
+".exemplo".São comandos que podem ser executados quando determinados eventos acontecerem,
+ como por exemplo um pré commit (pre-commit.sample). Isto quer dizer que, antes de 
+executar um commit, um script com este nome será executado. Vamos tentar abri-lo para 
+verificar seu conteúdo, por meio de cat pre-commit.sample. Identificaremos que trata-se 
+de um Shell script, portanto poderemos criar um para que seja executado quando tentarmos 
+realizar um commit.
+
+Utilizaremos o comando vim pre-commit, sem o .sample, pois assim são os eventos. Criado o
+ arquivo, começaremos o arquivo digitando #!/bin/sh (não se preocupem caso não conheçam 
+Shell script), e então poderemos executar qualquer comando que digitamos no Terminal,
+ como echo "Você está prestes a commitar. :-)". Pressionaremos a tecla "Esc" seguido de 
+dois pontos (:), xis (x) e "Enter".
+
+Então, digitaremos ls -l para verificar a permissão destes arquivos, aparentemente o
+ pre-commit estará correto por estar com a mesma permissão dos demais, caso você esteja 
+no Linux, ou no Mac, a permissão não estará setada desta forma. Executaremos o comando 
+chmod u+x pre-commit seguido de ls -l. Neste caso, não há nenhuma diferença em relação à 
+lista anterior. Mas se você ainda não tinha permissão para execução, indicado por -x, 
+agora a terá. Sairemos da pasta do Git com cd ../.. e tentaremos realizar algum commit 
+acessando o 
+arquivo do VS Code. Alteraremos "Cursos de Linux" para "Cursos do SO Linux". Voltaremos 
+ao Terminal, e estaremos na master, porém não nos preocuparemos com isto no momento. 
+Vamos executar git add index.html e git commit -m "Alterando título dos cursos de Linux",
+ ao que teremos o retorno do script que incluímos anteriormente. Trata-se de um evento do
+ Git, um hook do mesmo.
+
+
+DEPLOY COM O GIT
+
+Aqui, teremos todo o conhecimento necessário para colocarmos uma aplicação no ar, seja ela em qual linguagem de programação que for. Neste projeto utilizamos HTML para que ninguém se sinta intimidado. O que faremos é acessar o nosso servidor que criamos no primeiro curso, com cd ../servidor/, que inclusive o Git bash já nos mostra que trata-se de um servidor "puro" (bare).
+
+Acessaremos sua pasta de hooks por meio de cd hooks/. Não precisaremos entrar na pasta ".git", pois este repositório contém apenas esta parte que seria do ".git". Ao utilizarmos ls, teremos um evento pre-receive.sample, isto é, que precede uma atualização. Criaremos um evento post-receive, com vim post-receive, para que executemos este script após recebermos um push.
+
+Este script não fará muito, algo como copiar o arquivo index.html para uma pasta da nossa aplicação, por meio de:
+
+#!/bin/sh
+
+cp index.html C:\Users\ALURA\Documents\git-e-github\webCOPIAR CÓDIGO
+Isto funcionaria se o repositório tivesse uma cópia de index.html. Porém, lembram que trata-se de um repositório puro, que somente gerencia as modificações? Então, precisaremos de um comando Git para que se altere o estado atual da nossa aplicação, adicionando aquela Working tree, a árvore em que se localiza o diretório dos arquivos a serem editados.
+
+Portanto, executaremos:
+
+#!/bin/sh
+
+git --git-dir="C:\Users\ALURA\Documents\git-e-github\servidor" --work-tree="C:\Users\ALURA\Documents\git-e-github\web" checkout -fCOPIAR CÓDIGO
+Em que C:\Users\ALURA\Documents\git-e-github\servidor é o endereço do diretório Git, ou 
+seja, do repositório. Precisaremos indicar que, 
+a partir de agora, temos também a Working tree (ou Working dir, dependendo da literatura), que demonstra o local das cópias dos arquivos.
+
+Para verificar se este comando funciona, utilizaremos ":x" para sair, e no Terminal, 
+digitaremos ls -l para garantir que as permissões estejam corretas, e então teremos o post-receive. Voltaremos para a pasta do Vinicius com cd ../../vinicius/ e executaremos git log --oneline. Não haverá nenhum commit que não tenha sido enviado, e criaremos um commit com alguma alteração feita manualmente no VS Code.
+
+Após executarmos git add index.html, git commit -m "Alterando título dos cursos de
+ Linux". Antes de executarmos git push local master, porém, abriremos o arquivo 
+post-receive com um editor de textos qualquer, e notaremos que o envio está sendo feito 
+para a pasta "web", que não existe. Vamos criá-la antes que ocorra algum erro. Agora,
+ sim, se tudo correr como esperado, quando executarmos o push, o arquivo index.html 
+estará nesta pasta recém criada.
+
+Ou seja, é como se esta pasta fosse o nosso servidor web, a partir do qual conseguiremos
+ acessar nossa aplicação. O hook em nosso repositório remoto, que chamamos de "local", 
+foi executado com sucesso, e o comando checkout -f força um checkout, alterando o estado 
+da aplicação, do nosso Work tree. Como não estamos passando nenhum novo estado, 
+precisamos forçar o checkout.
+
+Com isso, conseguimos ter um deploy automático, e poderemos inclusive acessar a página 
+HTML. Assim, se adicionarmos mais um curso à lista de cursos Linux, por exemplo, 
+executando em seguida git status, git add index.html e git commit -m "Adicionando novo
+ curso de Linux", e então git push local master, com o qual fazemos apenas o push, e mais
+ nada, e acessarmos a página que seria o do nosso servidor rodando, já teremos a modificação aplicada.
+
+Temos, então, um processo de deploy totalmente automatizado, apenas utilizando o Git. 
+Poderiam ter outras ferramentas envolvidas, deveriam, inclusive; poderíamos rodar o 
+framework de testes no pré commit, minificar os arquivos se estivermos trabalhando com 
+front end, e no post receive poderemos fazer deploy, ou quaisquer outros tratamentos 
+necessários.
+
+Esta não é a única melhor forma de criarmos um deploy automatizado, e fica a recomendação 
+de se fazer o curso de Integração Contínua: Maturidade e Produtividade no Desenvolvimento
+ de Software para entender um pouco melhor sobre essas possibilidades.
+
+Esta, na minha opinião, é a parte mais interessante de quando se trabalha com Git: a 
+automatização do trabalho.
